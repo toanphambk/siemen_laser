@@ -167,15 +167,15 @@ export class LaserControllerService {
           });
         }
       });
-
-      await new Promise<void>((res) => {
-        setTimeout(() => {
-          windowInfo = this.getLaserWindow();
-          laserWindow = new Hardware(windowInfo.title);
-          res();
-        }, 3000);
-      });
     }
+
+    await new Promise<void>((res) => {
+      setTimeout(() => {
+        windowInfo = this.getLaserWindow();
+        laserWindow = new Hardware(windowInfo.title);
+        res();
+      }, 3000);
+    });
 
     if (fileName == windowInfo.fileName) {
       this.data.state = LaserControllerState.READY;
