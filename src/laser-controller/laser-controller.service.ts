@@ -173,14 +173,7 @@ export class LaserControllerService {
           windowInfo = this.getLaserWindow();
           laserWindow = new Hardware(windowInfo.title);
           res();
-        }, 2000);
-      });
-
-      await new Promise<void>((res) => {
-        setTimeout(() => {
-          laserWindow.keyboard.sendKey('enter');
-          res();
-        }, 2000);
+        }, 3000);
       });
     }
 
@@ -205,7 +198,7 @@ export class LaserControllerService {
         );
         await laserWindow.keyboard.sendKey('enter');
         res();
-      }, 4000);
+      }, 1000);
     });
 
     await new Promise<void>((res) => {
