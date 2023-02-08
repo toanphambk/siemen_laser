@@ -84,6 +84,7 @@ export class MainControllerService {
       this.plcCommunicationService.writeBlock(
         [this.blockSetting.plcHeartbeat],
         [(this.heartBeat = !this.heartBeat)],
+        false,
       );
     }
   };
