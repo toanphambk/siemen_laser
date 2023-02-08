@@ -3,9 +3,10 @@ import { Configuration } from './configuration.interface';
 
 const argv = yargs(process.argv.slice(2))
   .options({
-    host: { type: 'string', default: 'test' },
+    com: { type: 'string', default: 'COM1' },
   })
   .parseSync();
+console.log(argv);
 
 const configuration: Configuration = {
   blockSetting: {
@@ -57,7 +58,7 @@ const configuration: Configuration = {
     slot: 1,
   },
   comportSetting: {
-    portNo: 'COM1',
+    portNo: 'COM3',
     baudrate: 9600,
     dataBit: 8,
     stopBit: 1,

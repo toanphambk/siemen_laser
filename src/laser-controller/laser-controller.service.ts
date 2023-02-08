@@ -83,7 +83,6 @@ export class LaserControllerService {
         res();
       }, 200);
     });
-    // this.data.state = LaserControllerState.WORKING;
     return true;
   };
 
@@ -155,7 +154,7 @@ export class LaserControllerService {
     });
   };
 
-  private initLaserSofware = async (fileName) => {
+  public initLaserSofware = async (fileName) => {
     let windowInfo = this.getLaserWindow();
     let laserWindow;
 

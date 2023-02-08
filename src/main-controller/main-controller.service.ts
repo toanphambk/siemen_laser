@@ -48,6 +48,7 @@ export class MainControllerService {
       this.barcodeSetting =
         this.configService.get<ComportSetting>('comportSetting');
       this.barcodeControllerService.initBarcodeScanner(this.barcodeSetting);
+
       await this.plcCommunicationService.initConnection({
         ip: '192.168.1.50',
         port: 102,
@@ -55,10 +56,11 @@ export class MainControllerService {
         slot: 1,
       });
       await this.plcCommunicationService.addDataBlock(this.blockSetting);
-      await this.laserControllerService.InitLaserControllerService(
-        this.laserSoftWareSetting,
-        this.systemData.plc.laserModel.replaceAll('\x00', ''),
-      );
+      // await this.laserControllerService.InitLaserControllerService(
+      //   this.laserSoftWareSetting,
+      //   this.systemData.plc.laserModel.replaceAll('\x00', ''),
+      // );
+      this.plcHeartbeat();
     } catch (error) {}
   };
 
@@ -111,7 +113,7 @@ export class MainControllerService {
         return;
       }
       if (key == 'barcodeData') {
-        if (this.systemData.plc.barcodeFlag == 0) {
+        if (this.systemData.plc.barcodeFlag == 1) {
           console.log('PLC is not ready');
           return;
         }
@@ -130,6 +132,11 @@ export class MainControllerService {
         );
         return;
       }
+      if (key == 'laserModel') {
+        this.laserControllerService.initLaserSofware(
+          this.systemData.plc.laserModel,
+        );
+      }
     }
 
     if (service == 'laser') {
@@ -140,15 +147,15 @@ export class MainControllerService {
         );
         return;
       }
-    }
-    if (key == 'laserMarkingCommand') {
-      this.laserControllerService.triggerLaser(
-        this.systemData.barcode.barcodeData,
-        this.systemData.plc.laserModel,
-      );
-    }
-    if (key == 'laserStopCommand') {
-      this.laserControllerService.stopLaser();
+      if (key == 'laserMarkingCommand') {
+        this.laserControllerService.triggerLaser(
+          this.systemData.barcode.barcodeData,
+          this.systemData.plc.laserModel,
+        );
+      }
+      if (key == 'laserStopCommand') {
+        this.laserControllerService.stopLaser();
+      }
     }
   }
 }
