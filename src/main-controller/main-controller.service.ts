@@ -147,13 +147,13 @@ export class MainControllerService {
         );
         return;
       }
-      if (key == 'laserMarkingCommand') {
+      if (key == 'laserMarkingCommand' && val == true) {
         this.laserControllerService.triggerLaser(
           this.systemData.barcode.barcodeData,
           this.systemData.plc.laserModel,
         );
       }
-      if (key == 'laserStopCommand') {
+      if (key == 'laserStopCommand' && val == true) {
         this.laserControllerService.stopLaser();
       }
     }
