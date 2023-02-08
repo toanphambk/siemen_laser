@@ -64,18 +64,6 @@ export class MainControllerService {
     } catch (error) {}
   };
 
-  private hexToAscii(hexx) {
-    const hex = hexx.toString();
-    let str = '';
-    for (let i = 0; i < hex.length; i += 2) {
-      const _char = String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-      if (_char != '\0') {
-        str += _char;
-      }
-    }
-    return str;
-  }
-
   private plcHeartbeat = () => {
     setTimeout(() => {
       this.plcHeartbeat();
@@ -135,7 +123,7 @@ export class MainControllerService {
       }
       if (key == 'laserModel') {
         this.laserControllerService.initLaserSofware(
-          this.systemData.plc.laserModel,
+          this.systemData.plc.laserModel.replaceAll('\x00', ''),
         );
       }
     }
