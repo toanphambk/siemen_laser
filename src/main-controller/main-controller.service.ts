@@ -56,10 +56,10 @@ export class MainControllerService {
         slot: 1,
       });
       await this.plcCommunicationService.addDataBlock(this.blockSetting);
-      // await this.laserControllerService.InitLaserControllerService(
-      //   this.laserSoftWareSetting,
-      //   this.systemData.plc.laserModel.replaceAll('\x00', ''),
-      // );
+      await this.laserControllerService.InitLaserControllerService(
+        this.laserSoftWareSetting,
+        this.systemData.plc.laserModel.replaceAll('\x00', ''),
+      );
       this.plcHeartbeat();
     } catch (error) {}
   };
