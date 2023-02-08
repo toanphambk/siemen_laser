@@ -201,7 +201,7 @@ export class LaserControllerService {
     });
 
     windowInfo = this.getLaserWindow();
-
+    console.log(windowInfo);
     if (windowInfo.fileName == fileName) {
       return windowInfo;
     }
