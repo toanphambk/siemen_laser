@@ -58,7 +58,7 @@ const configuration: Configuration = {
     slot: 1,
   },
   comportSetting: {
-    portNo: 'COM3',
+    portNo: 'COM1',
     baudrate: 9600,
     dataBit: 8,
     stopBit: 1,
