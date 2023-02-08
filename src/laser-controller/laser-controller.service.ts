@@ -156,7 +156,6 @@ export class LaserControllerService {
 
   public initLaserSofware = async (fileName) => {
     let windowInfo = this.getLaserWindow();
-    let laserWindow;
 
     if (!windowInfo) {
       this.data.state = LaserControllerState.INIT;
@@ -167,26 +166,20 @@ export class LaserControllerService {
           });
         }
       });
+      await new Promise<void>((res) => {
+        setTimeout(() => {
+          res();
+        }, 3000);
+      });
     }
 
-    await new Promise<void>((res) => {
-      setTimeout(() => {
-        windowInfo = this.getLaserWindow();
-        laserWindow = new Hardware(windowInfo.title);
-        res();
-      }, 3000);
-    });
+    windowInfo = this.getLaserWindow();
+    const laserWindow = new Hardware(windowInfo.title);
 
     if (fileName == windowInfo.fileName) {
       this.data.state = LaserControllerState.READY;
       return windowInfo;
     }
-
-    await new Promise<void>((res) => {
-      setTimeout(() => {
-        res();
-      }, 2000);
-    });
 
     await new Promise<void>((res) => {
       setTimeout(async () => {
@@ -208,6 +201,7 @@ export class LaserControllerService {
     });
 
     windowInfo = this.getLaserWindow();
+
     if (windowInfo.fileName == fileName) {
       return windowInfo;
     }
