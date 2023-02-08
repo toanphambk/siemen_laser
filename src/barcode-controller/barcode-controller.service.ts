@@ -47,6 +47,7 @@ export class BarcodeControllerService {
                 stopBit,
               });
             }, 1000);
+            return;
           }
           this.data.state = ServiceState.READY;
           res();
