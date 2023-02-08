@@ -42,7 +42,7 @@ export class LaserControllerService {
       console.log('laser service is not ready');
       return false;
     }
-    this.data.state = LaserControllerState.WORKING;
+    // this.data.state = LaserControllerState.WORKING;
     //check if software is opening
     const windowInfor = await this.initLaserSofware(fileName);
     const laserWindow = new Hardware(windowInfor.title);
@@ -212,7 +212,7 @@ export class LaserControllerService {
       return windowInfo;
     }
     this.errorHandler('INIT LASER SOFTWARE', false, {
-      detail: 'Cant fint laser window',
+      detail: 'Cant find laser window',
     });
     return undefined;
   };
