@@ -55,7 +55,6 @@ export class BarcodeControllerService {
       );
 
       this.barcodeScanner.on('open', () => {
-        console.log('Barcode connected');
         this.barcodeScanner.on('data', (data) => {
           this.data.barcodeData = Buffer.from(data).toString();
           this.barcodeControllerServiceEvent.emit(
