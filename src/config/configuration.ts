@@ -7,8 +7,6 @@ const argv = yargs(process.argv.slice(2))
   })
   .parseSync();
 
-console.log(argv.com);
-
 const configuration: Configuration = {
   blockSetting: {
     barcodeState: {
@@ -59,7 +57,7 @@ const configuration: Configuration = {
     slot: 1,
   },
   comportSetting: {
-    portNo: 'COM3',
+    portNo: argv.com,
     baudrate: 9600,
     dataBit: 8,
     stopBit: 1,
