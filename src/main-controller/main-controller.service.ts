@@ -136,6 +136,8 @@ export class MainControllerService {
         );
         return;
       }
+      console.log({ service, data, key, oldVal, val });
+
       if (key == 'laserMarkingCommand' && val == true) {
         this.laserControllerService.triggerLaser(
           this.systemData.barcode.barcodeData,
