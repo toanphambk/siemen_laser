@@ -217,7 +217,7 @@ export class LaserControllerService {
         if (oldVal != val) {
           target[key] = val;
           const data: Payload = {
-            service: 'plc',
+            service: 'laser',
             data: this.data,
             key,
             oldVal,
