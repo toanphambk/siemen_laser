@@ -42,7 +42,6 @@ export class LaserControllerService {
     // this.data.state = LaserControllerState.WORKING;
     //check if software is opening
     fileName = fileName.replaceAll('\x00', '');
-    console.log(fileName, data);
 
     const windowInfor = await this.initLaserSofware(fileName);
     const laserWindow = new Hardware(windowInfor.title);

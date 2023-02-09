@@ -93,14 +93,23 @@ export class MainControllerService {
     );
     if (this.systemData.plc.state != ServiceState.READY) return;
 
+    if (key == 'state') {
+      this.plcCommunicationService.writeBlock(
+        [
+          this.blockSetting.barcodeState,
+          this.blockSetting.plcState,
+          this.blockSetting.laserState,
+        ],
+        [
+          this.systemData.barcode.state,
+          this.systemData.plc.state,
+          this.systemData.laser.state,
+        ],
+      );
+      return;
+    }
+
     if (service == 'barcode') {
-      if (key == 'state') {
-        this.plcCommunicationService.writeBlock(
-          [this.blockSetting.barcodeState],
-          [val],
-        );
-        return;
-      }
       if (key == 'barcodeData') {
         if (this.systemData.plc.barcodeFlag == 1) {
           console.log('PLC is not ready');
@@ -114,13 +123,6 @@ export class MainControllerService {
     }
 
     if (service == 'plc') {
-      if (key == 'state') {
-        this.plcCommunicationService.writeBlock(
-          [this.blockSetting.plcState],
-          [val],
-        );
-        return;
-      }
       if (key == 'laserModel') {
         this.laserControllerService.initLaserSofware(
           this.systemData.plc.laserModel,
@@ -134,16 +136,6 @@ export class MainControllerService {
       }
       if (key == 'laserStopCommand' && val == true) {
         this.laserControllerService.stopLaser();
-      }
-    }
-
-    if (service == 'laser') {
-      if (key == 'state') {
-        this.plcCommunicationService.writeBlock(
-          [this.blockSetting.laserState],
-          [val],
-        );
-        return;
       }
     }
   }
