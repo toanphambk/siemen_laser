@@ -34,16 +34,14 @@ export class LaserControllerService {
     await this.initLaserSofware(fileName);
   };
 
-  public triggerLaser = async (
-    data: string,
-    fileName: string,
-  ): Promise<boolean> => {
+  public triggerLaser = async (data: string, fileName): Promise<boolean> => {
     if (this.data.state != LaserControllerState.READY) {
       console.log('laser service is not ready');
       return false;
     }
     // this.data.state = LaserControllerState.WORKING;
     //check if software is opening
+    fileName = fileName.replaceAll('\x00', '');
     const windowInfor = await this.initLaserSofware(fileName);
     const laserWindow = new Hardware(windowInfor.title);
     if (!laserWindow.workwindow.isOpen()) {
@@ -202,8 +200,8 @@ export class LaserControllerService {
     });
 
     windowInfo = this.getLaserWindow();
-    console.log(windowInfo);
     if (windowInfo.fileName == fileName) {
+      this.data.state = LaserControllerState.READY;
       return windowInfo;
     }
     this.errorHandler('INIT LASER SOFTWARE', false, {
