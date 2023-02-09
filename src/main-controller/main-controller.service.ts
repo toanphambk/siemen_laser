@@ -47,7 +47,6 @@ export class MainControllerService {
         this.configService.get<LaserSoftWareSetting>('laserSoftware');
       this.barcodeSetting =
         this.configService.get<ComportSetting>('comportSetting');
-      this.barcodeControllerService.initBarcodeScanner(this.barcodeSetting);
 
       await this.plcCommunicationService.initConnection({
         ip: '192.168.1.50',
@@ -60,6 +59,9 @@ export class MainControllerService {
       await this.laserControllerService.InitLaserControllerService(
         this.laserSoftWareSetting,
         this.systemData.plc.laserModel,
+      );
+      await this.barcodeControllerService.initBarcodeScanner(
+        this.barcodeSetting,
       );
     } catch (error) {}
   };
