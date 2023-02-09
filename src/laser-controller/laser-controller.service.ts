@@ -168,12 +168,13 @@ export class LaserControllerService {
       await new Promise<void>((res) => {
         setTimeout(() => {
           res();
-        }, 1000);
+        }, 1500);
       });
     }
 
     windowInfo = this.getLaserWindow();
     const laserWindow = new Hardware(windowInfo.title);
+
     await new Promise((res) => {
       setTimeout(async () => {
         await laserWindow.keyboard.sendKey('enter');
