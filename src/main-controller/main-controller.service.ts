@@ -59,7 +59,7 @@ export class MainControllerService {
       this.plcHeartbeat();
       await this.laserControllerService.InitLaserControllerService(
         this.laserSoftWareSetting,
-        this.systemData.plc.laserModel.replaceAll('\x00', ''),
+        this.systemData.plc.laserModel,
       );
     } catch (error) {}
   };
@@ -123,7 +123,7 @@ export class MainControllerService {
       }
       if (key == 'laserModel') {
         this.laserControllerService.initLaserSofware(
-          this.systemData.plc.laserModel.replaceAll('\x00', ''),
+          this.systemData.plc.laserModel,
         );
       }
     }

@@ -155,6 +155,7 @@ export class LaserControllerService {
   };
 
   public initLaserSofware = async (fileName) => {
+    fileName = fileName.replaceAll('\x00', '');
     let windowInfo = this.getLaserWindow();
 
     if (!windowInfo) {
