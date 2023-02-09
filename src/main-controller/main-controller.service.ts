@@ -67,7 +67,7 @@ export class MainControllerService {
   private plcHeartbeat = () => {
     setTimeout(() => {
       this.plcHeartbeat();
-    }, 1000);
+    }, 5000);
     if (this.systemData.plc.state == ServiceState.READY) {
       this.plcCommunicationService.writeBlock(
         [this.blockSetting.plcHeartbeat],
