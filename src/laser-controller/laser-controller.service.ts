@@ -177,6 +177,7 @@ export class LaserControllerService {
     await new Promise((res) => {
       setTimeout(async () => {
         await laserWindow.keyboard.sendKey('enter');
+        res();
       }, 500);
     });
     if (fileName == windowInfo.fileName) {
