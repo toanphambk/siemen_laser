@@ -168,13 +168,17 @@ export class LaserControllerService {
       await new Promise<void>((res) => {
         setTimeout(() => {
           res();
-        }, 3000);
+        }, 1000);
       });
     }
 
     windowInfo = this.getLaserWindow();
     const laserWindow = new Hardware(windowInfo.title);
-
+    await new Promise((res) => {
+      setTimeout(async () => {
+        await laserWindow.keyboard.sendKey('enter');
+      }, 500);
+    });
     if (fileName == windowInfo.fileName) {
       this.data.state = LaserControllerState.READY;
       return windowInfo;
@@ -186,7 +190,7 @@ export class LaserControllerService {
         await laserWindow.keyboard.printText(
           `${this.path.template}\\${fileName}.ezd`,
           0,
-          50,
+          20,
         );
         await laserWindow.keyboard.sendKey('enter');
         res();

@@ -6,7 +6,8 @@ const argv = yargs(process.argv.slice(2))
     com: { type: 'string', default: 'COM1' },
   })
   .parseSync();
-console.log(argv);
+
+console.log(argv.com);
 
 const configuration: Configuration = {
   blockSetting: {
