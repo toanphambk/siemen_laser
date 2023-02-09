@@ -126,6 +126,15 @@ export class MainControllerService {
           this.systemData.plc.laserModel,
         );
       }
+      if (key == 'laserMarkingCommand' && val == true) {
+        this.laserControllerService.triggerLaser(
+          this.systemData.barcode.barcodeData,
+          this.systemData.plc.laserModel,
+        );
+      }
+      if (key == 'laserStopCommand' && val == true) {
+        this.laserControllerService.stopLaser();
+      }
     }
 
     if (service == 'laser') {
@@ -135,17 +144,6 @@ export class MainControllerService {
           [val],
         );
         return;
-      }
-      console.log({ service, data, key, oldVal, val });
-
-      if (key == 'laserMarkingCommand' && val == true) {
-        this.laserControllerService.triggerLaser(
-          this.systemData.barcode.barcodeData,
-          this.systemData.plc.laserModel,
-        );
-      }
-      if (key == 'laserStopCommand' && val == true) {
-        this.laserControllerService.stopLaser();
       }
     }
   }
