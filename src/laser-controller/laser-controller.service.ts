@@ -223,7 +223,7 @@ export class LaserControllerService {
             oldVal,
             val,
           };
-          this.laserControllerEvent.emit('dataChange', data);
+          this.laserControllerServiceEvent.emit('dataChange', data);
           return true;
         }
         return true;
