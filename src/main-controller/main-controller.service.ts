@@ -55,13 +55,11 @@ export class MainControllerService {
         slot: 1,
       });
       await this.plcCommunicationService.addDataBlock(this.blockSetting);
+      this.barcodeControllerService.initBarcodeScanner(this.barcodeSetting);
       this.plcHeartbeat();
-      await this.laserControllerService.InitLaserControllerService(
+      this.laserControllerService.InitLaserControllerService(
         this.laserSoftWareSetting,
         this.systemData.plc.laserModel,
-      );
-      await this.barcodeControllerService.initBarcodeScanner(
-        this.barcodeSetting,
       );
     } catch (error) {}
   };
