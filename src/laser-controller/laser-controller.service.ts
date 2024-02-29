@@ -111,9 +111,8 @@ export class LaserControllerService {
         res();
       }, 200);
     });
-    this.errorHandler('LASER STOP', false, {
-      detail: 'PLC laser stop signal',
-    });
+
+    
   };
 
   private initTCPserver = (
@@ -166,10 +165,18 @@ export class LaserControllerService {
           });
         }
       });
-      await new Promise<void>((res) => {
-        setTimeout(() => {
-          res();
+      const _tempHanlder = new Hardware();
+
+      await new Promise((res) => {
+        setTimeout(async () => {
+          await _tempHanlder.keyboard.sendKey('enter');
+          res(0);
         }, 1500);
+      });
+      await new Promise((res) => {
+        setTimeout(async () => {
+          res(0);
+        }, 2000);
       });
     }
 

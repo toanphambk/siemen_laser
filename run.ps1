@@ -1,0 +1,1 @@
+node C:/Users/PC/siemen_laser/dist/main.js --com 'COM10'
