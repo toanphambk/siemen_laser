@@ -61,7 +61,7 @@ export class MainControllerService {
         this.laserSoftWareSetting,
         this.systemData.plc.laserModel,
       );
-    } catch (error) {}
+    } catch (error) { }
   };
 
   private plcHeartbeat = () => {
@@ -132,7 +132,7 @@ export class MainControllerService {
           console.error('Error initializing laser software:', error);
         }
       }
-      if (key == 'laserMarkingCommand' && val == true) {
+      if (key == 'laserMarkingCommand' && val && !data.laserStopCommand) {
         try {
           this.laserControllerService.triggerLaser(
             this.systemData.barcode.barcodeData,

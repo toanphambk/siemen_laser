@@ -44,3 +44,4 @@ export type BlockName =
   | 'laserModel'
   | 'plcState'
   | 'plcHeartbeat' 
+

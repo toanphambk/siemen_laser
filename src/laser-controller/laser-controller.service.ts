@@ -35,10 +35,10 @@ export class LaserControllerService {
   };
 
   public triggerLaser = async (data: string, fileName): Promise<boolean> => {
-    if (this.data.state != LaserControllerState.READY) {
-      console.log('laser service is not ready');
-      return false;
-    }
+    // if (this.data.state != LaserControllerState.READY) {
+    //   console.log('laser service is not ready');
+    //   return false;
+    // }
 
     fileName = fileName.replaceAll('\x00', '');
 
