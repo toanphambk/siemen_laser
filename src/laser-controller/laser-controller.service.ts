@@ -282,6 +282,5 @@ export class LaserControllerService {
   private errorHandler = async (err, isOperational, data?) => {
     this.data.state = LaserControllerState.ERROR;
     console.log(`[ ERROR ] :  ${err} : ${data ? JSON.stringify(data) : ''}`);
-    throw new Error(err);
   };
 }
