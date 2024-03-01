@@ -39,12 +39,23 @@ export class LaserControllerService {
       console.log('laser service is not ready');
       return false;
     }
-    // this.data.state = LaserControllerState.WORKING;
-    //check if software is opening
+
     fileName = fileName.replaceAll('\x00', '');
 
-    const windowInfor = await this.initLaserSofware(fileName);
-    const laserWindow = new Hardware(windowInfor.title);
+    const markWindow = new Hardware('Mark');
+    if (markWindow.workwindow.isOpen()) {
+      this.errorHandler('LASER Trigger', false, {
+        detail: 'Laser marking is opening',
+      });
+      return false;
+    }
+
+    let windowInfo = this.getLaserWindow();
+    if (!windowInfo) {
+      windowInfo = await this.initLaserSofware(fileName);
+    }
+    const laserWindow = new Hardware(windowInfo.title);
+
     if (!laserWindow.workwindow.isOpen()) {
       this.errorHandler('LASER TRIGGER', false, {
         detail: 'laser sofware is not opening',
@@ -85,6 +96,7 @@ export class LaserControllerService {
     return true;
   };
 
+
   public finishLaser = () => {
     if (this.data.state == LaserControllerState.WORKING) {
       this.data.state = LaserControllerState.READY;
@@ -111,8 +123,6 @@ export class LaserControllerService {
         res();
       }, 200);
     });
-
-    
   };
 
   private initTCPserver = (

@@ -124,18 +124,30 @@ export class MainControllerService {
 
     if (service == 'plc') {
       if (key == 'laserModel') {
-        this.laserControllerService.initLaserSofware(
-          this.systemData.plc.laserModel,
-        );
+        try {
+          this.laserControllerService.initLaserSofware(
+            this.systemData.plc.laserModel,
+          );
+        } catch (error) {
+          console.error('Error initializing laser software:', error);
+        }
       }
       if (key == 'laserMarkingCommand' && val == true) {
-        this.laserControllerService.triggerLaser(
-          this.systemData.barcode.barcodeData,
-          this.systemData.plc.laserModel,
-        );
+        try {
+          this.laserControllerService.triggerLaser(
+            this.systemData.barcode.barcodeData,
+            this.systemData.plc.laserModel,
+          );
+        } catch (error) {
+          console.error('Error triggering laser:', error);
+        }
       }
       if (key == 'laserStopCommand' && val == true) {
-        this.laserControllerService.stopLaser();
+        try {
+          this.laserControllerService.stopLaser();
+        } catch (error) {
+          console.error('Error stopping laser:', error);
+        }
       }
     }
   }

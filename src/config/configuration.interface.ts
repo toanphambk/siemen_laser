@@ -43,4 +43,4 @@ export type BlockName =
   | 'laserFinished'
   | 'laserModel'
   | 'plcState'
-  | 'plcHeartbeat';
+  | 'plcHeartbeat' 
